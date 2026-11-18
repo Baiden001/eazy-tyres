@@ -1607,3 +1607,106 @@ nav a{padding:10px 0}
     transform: none;
   }
 }
+
+/* QUOTE REQUEST FORM */
+.quote-form-wrap {
+  width: 100%;
+  max-width: 720px;
+}
+
+.quote-form-heading {
+  margin-bottom: 22px;
+}
+
+.quote-form-heading > span {
+  color: var(--o);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.quote-form-heading h2 {
+  margin: 8px 0;
+  font-size: clamp(25px, 3vw, 34px);
+}
+
+.quote-form-heading p {
+  color: #b7b7bf;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.quote-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.quote-fields .f {
+  min-width: 0;
+}
+
+.quote-fields .f:last-child {
+  grid-column: 1 / -1;
+}
+
+.quote-fields input,
+.quote-fields select,
+.quote-fields textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  border: 1px solid #38383e;
+  border-radius: 6px;
+  background: #141417;
+  color: #fff;
+  padding: 13px 14px;
+  font: inherit;
+  font-size: 14px;
+}
+
+.quote-fields select {
+  color-scheme: dark;
+}
+
+.quote-fields textarea {
+  resize: vertical;
+}
+
+.quote-fields input::placeholder,
+.quote-fields textarea::placeholder {
+  color: #777780;
+}
+
+.quote-fields input:focus,
+.quote-fields select:focus,
+.quote-fields textarea:focus {
+  outline: 2px solid var(--o);
+  outline-offset: 1px;
+}
+
+.quote-form > .btn {
+  margin-top: 18px;
+}
+
+.quote-form-note {
+  margin: 10px 0 0;
+  color: #8f8f98;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+  .quote-fields {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .quote-fields .f:last-child {
+    grid-column: auto;
+  }
+
+  .quote-form > .btn {
+    width: 100%;
+  }
+}
