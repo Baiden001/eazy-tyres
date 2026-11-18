@@ -615,5 +615,56 @@ nav a{padding:10px 0}
     opacity: 1;
     transform: none;
   }
+   
+/* =========================================================
+   MOBILE NAVIGATION REFINEMENT
+========================================================= */
+
+@media (max-width: 860px) {
+  header {
+    position: relative;
+  }
+
+  header.over {
+    position: absolute;
+  }
+
+  header nav {
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 5vw 20px;
+    background: #0a0a0b;
+    border-top: 1px solid #ffffff18;
+    border-bottom: 2px solid var(--o);
+    box-shadow: 0 14px 28px #00000055;
+    z-index: 20;
+  }
+
+  header nav a {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  header nav a.on {
+    color: var(--o);
+  }
+
+  #mb {
+    position: relative;
+    z-index: 21;
+    line-height: 1;
+    font-family: Arial, sans-serif;
+  }
+
+  #mb:active {
+    background: #ffffff12;
+  }
+}
+
 }
 
