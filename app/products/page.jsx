@@ -12,6 +12,10 @@ export default function Products(){
   <h2>Tyre sizes we supply</h2><div className="sizes">{SIZES.map(s=><span key={s}>{s}</span>)}</div>
   <p>Need a size or brand not listed? Ask us and we will source it.</p><Link className="btn" href="/contact">Request a quote</Link></section>
   <section className="blk alt"><h2>Tyres for every application</h2><p>Contact us for availability and quotations. Sizes shown are indicative of our range.</p>
-  <div className="pc-grid">{PRODUCT_CATEGORIES.map(c=><ProductCategory key={c.name} c={c}/>)}</div></section>
+  <div className="pc-grid">
+  {PRODUCT_CATEGORIES.map((c, index) => (
+    <ProductCategory key={c.name} c={c} index={index} />
+  ))}
+</div></section>
   <TyreCarousel/></>);
 }
