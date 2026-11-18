@@ -1,17 +1,27 @@
+
 import Link from 'next/link';
+
+const CATEGORY_IMAGES = [
+  '/assets/products/tipper-truck-tyres.png',
+  '/assets/products/trailer-tyres.png',
+  '/assets/products/light-truck-tyres.png',
+  '/assets/products/saloon-suv-tyres.png',
+];
 
 export default function ProductCategory({ c, index = 0 }) {
   const number = String(index + 1).padStart(2, '0');
+  const image = CATEGORY_IMAGES[index] || CATEGORY_IMAGES[0];
 
   return (
     <article className="pc">
-      <div className="pc-visual" aria-hidden="true">
+      <div className="pc-visual">
+        <img
+          className="pc-image"
+          src={image}
+          alt={`${c.name} product range`}
+          loading="lazy"
+        />
         <span className="pc-number">{number}</span>
-        <div className="pc-wheel">
-          <span className="pc-wheel-inner">
-            <span />
-          </span>
-        </div>
         <span className="pc-visual-label">EAZY ROAD TYRES</span>
       </div>
 
@@ -30,7 +40,9 @@ export default function ProductCategory({ c, index = 0 }) {
             <span key={s}>{s}</span>
           ))}
           {c.sizes.length > 5 && (
-            <span className="pc-more">+{c.sizes.length - 5} more</span>
+            <span className="pc-more">
+              +{c.sizes.length - 5} more
+            </span>
           )}
         </div>
 
