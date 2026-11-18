@@ -1710,3 +1710,208 @@ nav a{padding:10px 0}
     width: 100%;
   }
 }
+
+/* TYRE SIZE FINDER */
+.tyre-finder {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.finder-heading {
+  max-width: 680px;
+  margin-bottom: 28px;
+}
+
+.finder-heading > span {
+  color: var(--o);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.finder-heading h2 {
+  margin: 9px 0;
+  font-size: clamp(28px, 4vw, 42px);
+}
+
+.finder-heading p {
+  color: #b7b7bf;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.finder-controls {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 14px;
+  padding: 20px;
+  border: 1px solid #ffffff18;
+  border-radius: 12px;
+  background: #141417;
+}
+
+.finder-controls label {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  color: #c9c9cf;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.finder-controls input,
+.finder-controls select {
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid #38383e;
+  border-radius: 6px;
+  background: #0a0a0b;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+}
+
+.finder-controls input:focus,
+.finder-controls select:focus {
+  outline: 2px solid var(--o);
+  outline-offset: 1px;
+}
+
+.finder-controls select {
+  color-scheme: dark;
+}
+
+.finder-results-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 28px 0 12px;
+  color: #9999a1;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.finder-results-heading span:last-child {
+  color: var(--o);
+  letter-spacing: 0;
+}
+
+.finder-results {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.finder-result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid #ffffff16;
+  border-radius: 8px;
+  background: #141417;
+}
+
+.finder-result > div {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.finder-result strong {
+  color: #fff;
+  font-size: 16px;
+  font-family: 'Exo 2', Arial, sans-serif;
+}
+
+.finder-result > div span {
+  color: #9999a1;
+  font-size: 11px;
+}
+
+.finder-result button {
+  flex: 0 0 auto;
+  padding: 9px 13px;
+  border: 1px solid var(--o);
+  border-radius: 30px;
+  background: transparent;
+  color: var(--o);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.finder-result button:hover {
+  background: var(--o);
+  color: #fff;
+}
+
+.finder-empty {
+  padding: 30px 20px;
+  border: 1px solid #ffffff18;
+  border-radius: 10px;
+  background: #141417;
+  text-align: center;
+}
+
+.finder-empty h3 {
+  margin-bottom: 8px;
+  font-size: 20px;
+}
+
+.finder-empty p {
+  margin: 0 auto 14px;
+  color: #b7b7bf;
+  font-size: 13px;
+}
+
+.finder-empty a {
+  color: var(--o);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.finder-note {
+  margin-top: 16px;
+  color: #898991;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+@media (max-width: 760px) {
+  .finder-controls {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .finder-controls label:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 520px) {
+  .finder-controls {
+    grid-template-columns: 1fr;
+    padding: 15px;
+  }
+
+  .finder-controls label:first-child {
+    grid-column: auto;
+  }
+
+  .finder-results {
+    grid-template-columns: 1fr;
+  }
+
+  .finder-result {
+    padding: 13px;
+  }
+}
