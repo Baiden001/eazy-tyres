@@ -19,8 +19,8 @@ test('hero matches reference, pill removed, image mode by default',()=>{
   expect(screen.getByText(/Powering every journey/i)).toBeInTheDocument();
   expect(screen.getByText(/Keeping industry moving/i)).toBeInTheDocument();
   expect(screen.queryByText(/engineered for every terrain/i)).toBeNull();
-  expect(screen.getByText(/EXPLORE OUR PRODUCTS/).closest('a')).toHaveAttribute('href','/products');
-  expect(screen.getByText('CONTACT US').closest('a')).toHaveAttribute('href','/contact');
+  expect(screen.getByText(/EXPLORE OUR TYRES/).closest('a')).toHaveAttribute('href','/products');
+  expect(screen.getByText('TALK TO OUR TEAM').closest('a')).toHaveAttribute('href','/contact');
   ['Uncompromising Quality','Global Brand Partnerships','24/7 Emergency Support','Professional Tyre Solutions'].forEach(t=>expect(screen.getByText(t)).toBeInTheDocument());
   expect(container.querySelector('.hero-media img')).toHaveAttribute('src','/assets/hero.jpg');
   expect(container.querySelector('video')).toBeNull();
@@ -36,7 +36,7 @@ test('header shows all pages, marks the active page and has the WhatsApp button'
   NAV.forEach(([,n])=>expect(screen.getByText(n)).toBeInTheDocument());
   expect(screen.getByText('Products')).toHaveAttribute('aria-current','page');
   expect(screen.getByText('Get in Touch').getAttribute('href')).toContain('wa.me/233257510997');
-  const b=screen.getByLabelText('Menu'); fireEvent.click(b); expect(b).toHaveAttribute('aria-expanded','true');
+  const b=screen.getByLabelText('Open navigation menu'); fireEvent.click(b); expect(b).toHaveAttribute('aria-expanded','true');
   fireEvent.keyDown(window,{key:'Escape'}); expect(b).toHaveAttribute('aria-expanded','false');
 });
 test('carousel: two rows, opposite directions, unique keys, hidden duplicates',()=>{
@@ -48,10 +48,13 @@ test('carousel: two rows, opposite directions, unique keys, hidden duplicates',(
   expect(container.querySelectorAll('.ty[aria-hidden="true"]').length).toBeGreaterThan(0);
   expect(err).not.toHaveBeenCalled(); err.mockRestore();
 });
-test('brand logos exist for every brand and show origin details',()=>{
+test('brand logos exist for every brand and show their country of origin',()=>{
   render(<Products/>);
-  expect(screen.getByText('USA | Global Leader')).toBeInTheDocument(); expect(screen.getByText('China | Premium brand')).toBeInTheDocument();
-  BRAND_DETAILS.forEach(b=>expect(screen.getByAltText(`${b.name} logo`)).toHaveAttribute('src',b.logo));
+  BRAND_DETAILS.forEach(b=>{
+    expect(screen.getByAltText(`${b.name} tyre logo`)).toHaveAttribute('src',b.logo);
+    expect(screen.getAllByRole('heading',{name:b.name}).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(b.origin).length).toBeGreaterThan(0);
+  });
 });
 test('stats are verified figures only',()=>{
   expect(STATS.flat().join(' ')).not.toMatch(/100%/);
@@ -59,10 +62,10 @@ test('stats are verified figures only',()=>{
 });
 test('products page: brands, sizes, 6 categories, no pricing or shop features',()=>{
   const {container}=render(<Products/>);
-  BRANDS.forEach(b=>expect(screen.getByAltText(`${b} logo`)).toBeInTheDocument());
+  BRANDS.forEach(b=>expect(screen.getByAltText(`${b} tyre logo`)).toBeInTheDocument());
   ['315/80R22.5','13R22.5','265/65R17','175/65R14'].forEach(s=>expect(screen.getAllByText(s).length).toBeGreaterThan(0));
   expect(PRODUCT_CATEGORIES).toHaveLength(4);
-  PRODUCT_CATEGORIES.forEach(c=>expect(screen.getByText(c.name)).toBeInTheDocument());
+  PRODUCT_CATEGORIES.forEach(c=>expect(screen.getAllByText(c.name).length).toBeGreaterThan(0));
   expect(screen.getByText('Request a quote').closest('a')).toHaveAttribute('href','/contact');
   expect(screen.getByText('Tyres in motion')).toBeInTheDocument();
   expect(container.textContent).not.toMatch(/GH₵|GHS|\bprice|add to cart|checkout|buy now/i);
@@ -77,23 +80,25 @@ test('about, services and industries content',()=>{
   expect(screen.getByText(/most trusted and preferred tyre specialist in Ghana/)).toBeInTheDocument();
   expect(screen.getByText(/Founded on a passion for quality and reliability/)).toBeInTheDocument();
 });
-test('contact form validates required fields',()=>{
+test('contact form validates the four required fields',()=>{
   const open=vi.spyOn(window,'open').mockImplementation(()=>null);
   const {container}=render(<ContactForm/>);
   fireEvent.submit(container.querySelector('form'));
-  expect(screen.getAllByRole('alert')).toHaveLength(2); expect(open).not.toHaveBeenCalled();
+  expect(screen.getAllByRole('alert')).toHaveLength(4); expect(open).not.toHaveBeenCalled();
 });
-test('contact form builds an encoded WhatsApp message',()=>{
+test('contact form builds an encoded WhatsApp quotation request',()=>{
   const open=vi.spyOn(window,'open').mockImplementation(()=>null);
   const {container}=render(<ContactForm/>);
-  fireEvent.change(screen.getByLabelText('Full name'),{target:{value:'Kofi'}});
-  fireEvent.change(screen.getByLabelText('Company name'),{target:{value:'Mine Co'}});
-  fireEvent.change(screen.getByLabelText('Message'),{target:{value:'Need 29.5R25 & fitting'}});
+  fireEvent.change(screen.getByLabelText(/Full name/),{target:{value:'Kofi'}});
+  fireEvent.change(screen.getByLabelText(/Phone number/),{target:{value:'0241234567'}});
+  fireEvent.change(screen.getByLabelText(/Company \/ fleet name/),{target:{value:'Mine Co'}});
+  fireEvent.change(screen.getByLabelText(/Vehicle type/),{target:{value:'SUV'}});
+  fireEvent.change(screen.getByLabelText(/Quantity required/),{target:{value:'4'}});
   fireEvent.submit(container.querySelector('form'));
   const url=open.mock.calls[0][0]; expect(url).toContain('https://wa.me/233257510997?text=');
   const t=decodeURIComponent(url.split('text=')[1]);
-  expect(t).toContain('Name: Kofi'); expect(t).toContain('Company: Mine Co'); expect(t).toContain('Need 29.5R25 & fitting'); expect(t).not.toContain('Phone:');
-  expect(screen.getByRole('status')).toBeInTheDocument();
+  ['Name: Kofi','Phone: 0241234567','Company / Fleet: Mine Co','Vehicle type: SUV','Quantity: 4','Tyre size: Please advise','Preferred brand: No preference'].forEach(x=>expect(t).toContain(x));
+  expect(t).not.toContain('Delivery / service location');
 });
 test('sitemap lists all six pages',()=>{ expect(sitemap()).toHaveLength(6); });
 

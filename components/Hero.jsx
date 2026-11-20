@@ -55,25 +55,19 @@ export default function Hero() {
       <div className="shade" />
 
       <div className="hc">
-        <div className="hero-kicker rv">
-          <span />
-          TYRE SUPPLY & FITMENT SPECIALISTS
-        </div>
-
         <h1>
           <span className="ln rv">
-            The right tyres.
+            Powering every journey.
           </span>
           <span className="ln or rv">
-            For every road ahead.
+            Keeping industry moving.
           </span>
         </h1>
 
         <i className="bar" aria-hidden="true" />
 
         <p className="rv">
-          Dependable tyre solutions for commercial fleets,
-          heavy-duty vehicles and everyday driving.
+          Premium tyre solutions for commercial transportation and passenger vehicles.
         </p>
 
         <div className="bt rv">

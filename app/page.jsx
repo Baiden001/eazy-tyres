@@ -4,7 +4,9 @@ import TyreCarousel from '../components/TyreCarousel';
 import { Cards, Stats } from '../components/Ui';
 import { STATS, SERVICES, HOME_SERVICES, WA } from '../lib/data';
 import { pageMeta } from '../lib/site-config';
-export const metadata={...pageMeta('Eazy Road Tyres','Premium tyre solutions for commercial transportation and passenger vehicles. Tyre supply and fitment in Tarkwa, Ghana.','/'),title:{absolute:'Eazy Road Tyres | Truck, SUV and car tyres in Tarkwa, Ghana'}};
+const HOME_TITLE='Eazy Road Tyres | Truck, SUV and car tyres in Tarkwa, Ghana';
+const homeMeta=pageMeta('Eazy Road Tyres','Premium tyre solutions for commercial transportation and passenger vehicles. Tyre supply and fitment in Tarkwa, Ghana.','/');
+export const metadata={...homeMeta,title:{absolute:HOME_TITLE},openGraph:{...homeMeta.openGraph,title:HOME_TITLE},twitter:{...homeMeta.twitter,title:HOME_TITLE}};
 export default function Home(){
   return (<>
     <Hero/><TyreCarousel/>

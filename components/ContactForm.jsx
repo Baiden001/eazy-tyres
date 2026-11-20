@@ -109,7 +109,7 @@ export default function ContactForm() {
               aria-invalid={!!errors.vehicle}
             >
               <option value="" disabled>Select vehicle type</option>
-              <option>Tipper / heavy truck</option>
+              <option>Tipper truck</option>
               <option>Trailer</option>
               <option>Light commercial truck</option>
               <option>Pickup</option>
