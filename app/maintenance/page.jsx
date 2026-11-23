@@ -1,16 +1,17 @@
-
 export default function MaintenancePage() {
   return (
     <div
       style={{
         position: "fixed",
         inset: 0,
-        background: "#ffffff",
+        zIndex: 999999,
+        backgroundColor: "#ffffff",
         color: "#000000",
-        padding: "8px",
         fontFamily: "Times New Roman, serif",
         fontSize: "16px",
         fontWeight: "normal",
+        padding: "8px",
+        margin: 0,
         textAlign: "left",
       }}
     >
